@@ -2,6 +2,8 @@
 import "@fontsource/red-hat-display/variable.css";
 import "open-props/normalize";
 import "@/styles/globals.css";
+
+const year = new Date().getFullYear();
 ---
 
 <!DOCTYPE html>
@@ -17,6 +19,8 @@ import "@/styles/globals.css";
   </head>
   <body>
     <slot />
-    <footer>footer</footer>
+    <footer>
+      <div class="attribution">&#169; {year} Rudhi Mediastara</div>
+    </footer>
   </body>
 </html>
