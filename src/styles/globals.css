@@ -1,3 +1,5 @@
+@import "open-props/media";
+
 body {
   font-family: "Red Hat DisplayVariable", system-ui, -apple-system,
     BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
@@ -6,4 +8,62 @@ body {
 
 main {
   min-height: 100vh;
+}
+
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
+}
+
+.flex {
+  display: flex;
+  gap: var(--fgap, 1rem);
+}
+
+.fluid {
+  margin-inline: var(--size-fluid-1);
+}
+
+@media (--sm-n-above) {
+  .fluid {
+    margin-inline: var(--size-fluid-2);
+  }
+}
+
+@media (--md-n-above) {
+  .fluid {
+    margin-inline: var(--size-fluid-3);
+  }
+}
+
+@media (--lg-n-above) {
+  .fluid {
+    margin-inline: var(--size-fluid-4);
+  }
+}
+
+@media (--xl-n-above) {
+  .fluid {
+    margin-inline: var(--size-fluid-5);
+  }
+}
+
+footer {
+  padding: 1rem;
+  display: grid;
+  place-items: center;
+  border-top: 1px solid var(--gray-2);
+}
+
+.attribution {
+  font-weight: 500;
 }
