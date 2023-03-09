@@ -1,0 +1,22 @@
+---
+import "@fontsource/red-hat-display/variable.css";
+import "open-props/normalize";
+import "@/styles/globals.css";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.png" type="image/png" />
+    <slot name="head">
+      <title>Songprop.</title>
+    </slot>
+  </head>
+  <body>
+    <slot />
+    <footer>footer</footer>
+  </body>
+</html>
