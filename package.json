@@ -16,8 +16,10 @@
     "@astrojs/cloudflare": "^6.2.0",
     "@astrojs/solid-js": "^2.1.0",
     "@fontsource/red-hat-display": "^4.5.12",
+    "@nanostores/solid": "^0.3.2",
     "astro": "^2.1.2",
     "lodash-es": "^4.17.21",
+    "nanostores": "^0.7.4",
     "open-props": "^1.5.5",
     "solid-js": "^1.6.13",
     "swiper": "^9.1.0"
