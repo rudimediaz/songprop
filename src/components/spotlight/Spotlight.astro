@@ -1,0 +1,177 @@
+---
+interface SpotlightData {
+  title: string;
+  artist: string;
+  album: string;
+  songKey: string;
+  speed: string;
+  imageURL: string;
+}
+
+interface Props {
+  data: SpotlightData[];
+}
+
+const { data } = Astro.props;
+---
+
+<div class="relative">
+  <swiper-container
+    class="spotlight"
+    data-overlap
+    slides-per-view="1"
+    loop="true"
+    css-mode="true"
+    autoplay="true"
+    data-spotlight-sw-container
+  >
+    <swiper-slide>
+      <div class="spotlight__item spotlight__item-head">
+        <span>Lorem ipsum dolor, sit amet consectetur adipisicing.</span>
+      </div>
+    </swiper-slide>
+    {
+      data.map((item) => {
+        return (
+          <swiper-slide>
+            <div
+              class="spotlight__item"
+              style={`background-image : url(${item.imageURL});`}
+              data-spotlight-item
+            >
+              <span>{item.title}</span>
+              <span>{item.artist}</span>
+              <span>{item.album}</span>
+              <div class="flex spotlight__item__prop">
+                <span>{item.speed}</span>
+                <span>{item.songKey}</span>
+              </div>
+              <a href="#!">More Props</a>
+            </div>
+          </swiper-slide>
+        );
+      })
+    }
+  </swiper-container>
+  <div class="floating-bar-ctn">
+    <div class="floating-bar">{""}</div>
+  </div>
+</div>
+
+<style>
+  @import "open-props/media";
+  /* .spotlight {
+    background-color: var(--sand-4);
+  } */
+
+  swiper-slide :is(.spotlight__item, .spotlight__item-head) {
+    min-height: 60vmin;
+    display: flex;
+    flex-direction: column;
+    padding-inline: 2rem;
+  }
+
+  @media (--sm-n-below) {
+    swiper-slide :is(.spotlight__item, .spotlight__item-head) {
+      min-height: 70vmin;
+    }
+  }
+
+  .spotlight__item:not(.spotlight__item-head) {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: var(--lime-3);
+    background-blend-mode: soft-light;
+    /* filter: saturate(40%) brightness(1.2) contrast(2); */
+    gap: 0.25rem;
+    align-items: flex-end;
+    text-shadow: var(--gray-0) 1px 0 10px;
+  }
+
+  .spotlight__item :is(span, a) {
+    max-width: 24ch;
+    color: var(--gray-9);
+  }
+
+  .spotlight__item__prop {
+    --fgap: 0.5em;
+    align-items: center;
+  }
+
+  .spotlight__item__prop > span {
+    font-weight: 600;
+  }
+
+  .spotlight__item span:not(:nth-child(1)) {
+    font-size: var(--font-size-fluid-0);
+  }
+
+  .spotlight__item > span:nth-child(1) {
+    margin-block-start: max(5rem, 5vmin);
+    font-size: var(--font-size-fluid-1);
+    font-weight: 700;
+  }
+
+  .spotlight__item a {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+  }
+
+  .spotlight__item > :last-child {
+    margin-block-end: auto;
+  }
+
+  .spotlight__item-head {
+    background-image: url("bg-grad-songprop.avif");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .spotlight__item-head > span:nth-child(1) {
+    margin-block-end: auto;
+    margin-block-start: max(5rem, 15vmin);
+    font-size: var(--font-size-fluid-1);
+    font-weight: 700;
+    text-transform: capitalize;
+    letter-spacing: -2px;
+    text-align: start;
+  }
+
+  @media (--md-n-above) {
+    .spotlight__item-head > span:nth-child(1) {
+      font-size: var(--font-size-fluid-2);
+    }
+  }
+
+  @media (--lg-n-above) {
+    .spotlight__item-head > span:nth-child(1) {
+      font-size: var(--font-size-fluid-3);
+    }
+  }
+
+  .floating-bar-ctn {
+    position: absolute;
+    top: 100%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .floating-bar {
+    width: 90%;
+    background-color: #fff;
+    padding-block: 0.5rem;
+    padding-inline: 1rem;
+    box-shadow: var(--shadow-6);
+    border-radius: var(--radius-round);
+  }
+
+  @media (--md-n-above) {
+    .floating-bar {
+      width: 70%;
+    }
+  }
+</style>
