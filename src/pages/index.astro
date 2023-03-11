@@ -1,10 +1,119 @@
 ---
+import Spotlight from "@/components/spotlight/Spotlight.astro";
 import App from "@/layouts/App.astro";
 import Shell from "@/layouts/Shell.astro";
+
+const spotlightData = [
+  {
+    title: "Pink Venom",
+    artist: "BLACKPINK",
+    album: "Born Pink",
+    songKey: "A Minor",
+    speed: "120 BPM",
+    imageURL:
+      "https://i.scdn.co/image/ab6761860000101642a60377fdbe6982e81bb338",
+  },
+  {
+    title: "Expectation",
+    artist: "(G)I-DLE",
+    album: "Single",
+    songKey: "A Minor",
+    speed: "120 BPM",
+    imageURL:
+      "https://i.scdn.co/image/ab67618600001016c29ed118400d27c05b9c445a",
+  },
+  {
+    title: "Mirasantika",
+    artist: "LOONA",
+    album: "Single",
+    songKey: "A Minor",
+    speed: "120 BPM",
+    imageURL:
+      "https://i.scdn.co/image/ab676186000010164591722a23955a463a71dc29",
+  },
+  {
+    title: "Wakuncar",
+    artist: "SCANDAL",
+    album: "Single",
+    songKey: "A Minor",
+    speed: "120 BPM",
+    imageURL:
+      "https://i.scdn.co/image/ab67618600001016eaff60e6d5e1470d4ae1ce38",
+  },
+  {
+    title: "Semut Hitam",
+    artist: "Duo Kribo",
+    album: "Single",
+    songKey: "A Minor",
+    speed: "120 BPM",
+    imageURL:
+      "https://i.scdn.co/image/ab676186000010166c12d54b5d5e19d2b51c47aa",
+  },
+];
 ---
 
 <Shell>
   <App>
-    <main>Will be up soon</main>
+    <main>
+      <Spotlight data={spotlightData} />
+    </main>
   </App>
 </Shell>
+
+<script>
+  import { register } from "swiper/element/bundle";
+  import random from "lodash-es/random";
+  register();
+
+  const overlapElement = document.querySelector("[data-overlap]");
+
+  const overlapObserver = new IntersectionObserver(handleOverlap, {
+    threshold: 0.25,
+  });
+
+  if (overlapElement) {
+    overlapObserver.observe(overlapElement);
+  }
+
+  function handleOverlap(entries: IntersectionObserverEntry[]) {
+    const agents = document.querySelectorAll("[data-overlap-agent]");
+
+    for (const agent of agents) {
+      if (entries[0].isIntersecting) {
+        agent.classList.add("overlap");
+      } else {
+        agent.classList.remove("overlap");
+      }
+    }
+  }
+
+  const bgColors = [
+    "var(--clr-tantrum)",
+    "var(--clr-pepsi)",
+    "var(--clr-fanta)",
+    "var(--clr-popice)",
+  ];
+
+  const spotlightItems = document.querySelectorAll("[data-spotlight-item]");
+
+  setRandomBg(spotlightItems);
+
+  function setRandomBg(spotlightItems: NodeListOf<Element>) {
+    for (const spotlightItem of spotlightItems) {
+      if (spotlightItem) {
+        const idx = random(0, bgColors.length - 1);
+
+        (spotlightItem as HTMLElement).style.setProperty(
+          "background-color",
+          bgColors[idx]
+        );
+      }
+    }
+  }
+</script>
+
+<style>
+  main {
+    min-height: 999em;
+  }
+</style>

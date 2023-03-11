@@ -1,6 +1,6 @@
-<header>
+<header data-overlap-agent class:list={{ hp: Astro.url.pathname === "/" }}>
   <nav class="flex fluid">
-    <a href="/">
+    <a href="/" class="brand">
       <span class="sr-only">Home Page</span>
       <svg
         width="112"
@@ -18,18 +18,37 @@
 </header>
 
 <style>
+  @import "open-props/media";
   header {
+    --bg-header: hsl(0 100% 100% / 0.9);
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 997;
-    background-color: hsl(0 100% 100% / 0.9);
+    background-color: var(--bg-header);
     box-shadow: var(--shadow-1);
     backdrop-filter: blur(2px);
+  }
+
+  header.hp,
+  header.overlap {
+    background-color: transparent;
+    backdrop-filter: blur(1px);
+    box-shadow: none;
+  }
+
+  header.hp:not(.overlap) {
+    background-color: var(--bg-header);
   }
 
   nav {
     padding-block: 1rem;
     align-items: center;
   }
+
+  /* @media (--sm-n-below) {
+    .brand {
+      display: none;
+    }
+  } */
 </style>
