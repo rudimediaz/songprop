@@ -1,0 +1,17 @@
+---
+import App from "@/layouts/App.astro";
+import Shell from "@/layouts/Shell.astro";
+
+const requestURL = new URL(Astro.request.url);
+const keyword = requestURL.searchParams.get("q");
+
+if (!keyword) {
+  return Astro.redirect("/", 303);
+}
+---
+
+<Shell>
+  <App>
+    <main>search</main>
+  </App>
+</Shell>

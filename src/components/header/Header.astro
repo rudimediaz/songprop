@@ -1,6 +1,10 @@
+---
+import SearchBar from "../search-bar/SearchBar";
+---
+
 <header data-overlap-agent class:list={{ hp: Astro.url.pathname === "/" }}>
   <nav class="flex fluid">
-    <a href="/" class="brand">
+    <a href="/" class="brand" data-searchbar-sibling>
       <span class="sr-only">Home Page</span>
       <svg
         width="112"
@@ -14,6 +18,9 @@
           fill="black"></path>
       </svg>
     </a>
+    <div class="ctn-searchbar flex" data-overlap-agent>
+      <SearchBar client:only="solid" shared={true} />
+    </div>
   </nav>
 </header>
 
@@ -46,9 +53,22 @@
     align-items: center;
   }
 
-  /* @media (--sm-n-below) {
-    .brand {
+  .ctn-searchbar {
+    align-items: center;
+    flex: 1;
+  }
+
+  .ctn-searchbar.overlap {
+    visibility: hidden;
+  }
+
+  nav .searchbar_space {
+    display: none;
+  }
+
+  @media (--sm-n-below) {
+    header:not(.overlap) .brand {
       display: none;
     }
-  } */
+  }
 </style>
