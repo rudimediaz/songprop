@@ -4,7 +4,7 @@
   --clr-tantrum-hsl: 120 85% 80%;
   --clr-fanta-hsl: 360 85% 80%;
   --clr-pepsi-hsl: 260 85% 80%;
-  --clr-popice-hsl: 180 85% 80%;
+  --clr-popice-hsl: 200 85% 80%;
 
   --clr-tantrum: hsl(var(--clr-tantrum-hsl));
   --clr-fanta: hsl(var(--clr-fanta-hsl));
@@ -75,6 +75,10 @@ main {
   .fluid {
     margin-inline: var(--size-fluid-5);
   }
+}
+
+.hidden {
+  display: none;
 }
 
 footer {

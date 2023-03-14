@@ -1,4 +1,6 @@
 ---
+import SearchBar from "../search-bar/SearchBar";
+
 interface SpotlightData {
   title: string;
   artist: string;
@@ -23,6 +25,7 @@ const { data } = Astro.props;
     loop="true"
     css-mode="true"
     autoplay="true"
+    autoplay-delay="10000"
     data-spotlight-sw-container
   >
     <swiper-slide>
@@ -38,6 +41,7 @@ const { data } = Astro.props;
               class="spotlight__item"
               style={`background-image : url(${item.imageURL});`}
               data-spotlight-item
+              data-spotlight-color-agent
             >
               <span>{item.title}</span>
               <span>{item.artist}</span>
@@ -54,9 +58,41 @@ const { data } = Astro.props;
     }
   </swiper-container>
   <div class="floating-bar-ctn">
-    <div class="floating-bar">{""}</div>
+    <div class="floating-bar flex">
+      <SearchBar client:only="solid" shared={true} projection={true} />
+    </div>
   </div>
 </div>
+
+<script>
+  import random from "lodash-es/random";
+  const bgColors = [
+    "var(--clr-tantrum)",
+    "var(--clr-pepsi)",
+    "var(--clr-fanta)",
+    "var(--clr-popice)",
+  ];
+  const swiperContainer = document.querySelector(
+    "[data-spotlight-sw-container]"
+  );
+
+  if (swiperContainer) {
+    swiperContainer.addEventListener("slidechange", () => {
+      const backgroundColorAgents = document.querySelectorAll(
+        "[data-spotlight-color-agent]"
+      );
+      const idxColor = random(0, bgColors.length - 1);
+      const selectedColor = bgColors[idxColor];
+
+      for (const backgroundColorAgent of backgroundColorAgents) {
+        (backgroundColorAgent as HTMLElement).style.setProperty(
+          "--bg-spotlight",
+          selectedColor
+        );
+      }
+    });
+  }
+</script>
 
 <style>
   @import "open-props/media";
@@ -81,9 +117,9 @@ const { data } = Astro.props;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: var(--lime-3);
-    background-blend-mode: soft-light;
-    /* filter: saturate(40%) brightness(1.2) contrast(2); */
+    background-color: var(--bg-spotlight);
+    background-blend-mode: overlay;
+    /* filter: contrast(2); */
     gap: 0.25rem;
     align-items: flex-end;
     text-shadow: var(--gray-0) 1px 0 10px;
